@@ -27,6 +27,7 @@ class Edge extends React.Component {
     } = this.props;
     const className = classNames('edge', { highlighted, blurred, focused });
     const thickness = scale * (contrastMode ? 0.02 : 0.01) * NODE_BASE_SIZE;
+    const strokeWidth = focused ? thickness * 3 : thickness;
     const shouldRenderMarker = focused && (source !== target);
 
     // Draws the edge so that its thickness reflects the zoom scale.
@@ -36,10 +37,9 @@ class Edge extends React.Component {
         id={id} className={className}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        markerEnd={shouldRenderMarker && 'url(#Triangle)'}
       >
-        <path className="shadow" d={path} style={{ strokeWidth: 10 * thickness }} />
-        <path className="link" d={path} style={{ strokeWidth: thickness }} />
+        <path className="shadow" d={path} style={{ strokeWidth: 10 * strokeWidth }} />
+        <path className="link" d={path} markerEnd={shouldRenderMarker && 'url(#Triangle)'} style={{ strokeWidth }} />
       </g>
     );
   }

@@ -5,7 +5,7 @@ export default function Marker() {
     <marker
       className="edge-marker"
       id="Triangle"
-      viewBox="6 0 10 10"
+      viewBox="1 0 10 10"
       refX="18" refY="5"
       markerWidth="6"
       markerHeight="6"

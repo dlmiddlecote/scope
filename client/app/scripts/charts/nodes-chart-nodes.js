@@ -90,7 +90,7 @@ class NodesChartNodes extends React.Component {
       .sortBy(this.nodeDisplayLayer);
 
     return (
-      <g className="nodes-chart-nodes">
+      <g style={{ display: 'none' }} className="nodes-chart-nodes">
         {nodesToRender.map(node => (
           <NodeContainer
             matches={node.get('matches')}
