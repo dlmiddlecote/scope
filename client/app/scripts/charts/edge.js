@@ -39,7 +39,14 @@ class Edge extends React.Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <path className="shadow" d={path} style={{ strokeWidth: 10 * strokeWidth }} />
-        <path className="link" d={path} markerEnd={shouldRenderMarker && 'url(#Triangle)'} style={{ strokeWidth }} />
+        <path
+          className="link"
+          d={path}
+          markerEnd={shouldRenderMarker && 'url(#focused-arrow)'}
+          style={{ strokeWidth }}
+          pathLength="100"
+          strokeDasharray="85"
+        />
       </g>
     );
   }

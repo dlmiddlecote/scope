@@ -4,14 +4,14 @@ export default function Marker() {
   return (
     <marker
       className="edge-marker"
-      id="Triangle"
+      id="focused-arrow"
       viewBox="1 0 10 10"
-      refX="18" refY="5"
+      refX="38" refY="5"
       markerWidth="6"
       markerHeight="6"
       orient="auto"
     >
-      <path d="M 0 0 L 10 5 L 0 10 z" />
+      <path className="link" d="M 0 0 L 10 5 L 0 10 z" />
     </marker>
   );
 }
