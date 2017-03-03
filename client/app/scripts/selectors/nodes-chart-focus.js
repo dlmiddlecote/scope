@@ -6,12 +6,25 @@ import { fromJS, Set as makeSet } from 'immutable';
 import { NODE_BASE_SIZE, DETAILS_PANEL_WIDTH } from '../constants/styles';
 
 
-const circularOffsetAngle = Math.PI / 4;
+// const circularOffsetAngle = Math.PI / 4;
 
 // make sure circular layouts a bit denser with 3-6 nodes
 const radiusDensity = scaleThreshold()
   .domain([3, 6])
   .range([2.5, 3.5, 3]);
+
+function getNeighborRelationship(focusedNode, neighbor, edges) {
+  let relationship;
+  edges.forEach((edge) => {
+    if (edge.get('source') === focusedNode) {
+      relationship = 'server';
+    } else if (edge.get('target') === focusedNode) {
+      relationship = 'client';
+    }
+  });
+
+  return relationship;
+}
 
 // TODO: Make all the selectors below pure (so that they only depend on the global state).
 
@@ -127,7 +140,10 @@ export const layoutWithSelectedNode = createSelector(
     layoutNodes = layoutNodes.map((node, nodeId) => {
       const index = neighborsIds.indexOf(nodeId);
       if (index > -1) {
-        const angle = circularOffsetAngle + (index * circularInnerAngle);
+        const relationship = getNeighborRelationship(selectedNodeId, nodeId, layoutEdges);
+        const offset = relationship === 'client' ? (Math.PI / 4) * 5 : Math.PI / 4;
+        const angle = offset + (index * circularInnerAngle);
+        console.log(relationship, angle);
         return node.merge({
           x: viewportCenter.x + (circularRadius * Math.sin(angle)),
           y: viewportCenter.y + (circularRadius * Math.cos(angle))
